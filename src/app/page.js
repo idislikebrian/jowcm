@@ -92,7 +92,7 @@ export default function Home() {
         <div className={styles.hero}>
           <h1>772-742-1283</h1>
           <p>
-            So, listen, I've got this idea — an experiment to recognize the
+            So, listen, I&apos;ve got this idea — an experiment to recognize the
             immense power of collective generosity.
           </p>
           <p>Participating is easy! Just follow these simple steps:</p>
@@ -111,7 +111,7 @@ export default function Home() {
           </p>
           <p>
             Remember, your voicemail can be completely anonymous. Feel free to
-            share your name and details but only if you're comfortable doing so.
+            share your name and details but only if you&apos;re comfortable doing so.
           </p>
         </div>
         <div className={styles.answering}>
@@ -119,7 +119,7 @@ export default function Home() {
         </div>
         <div className={styles.prompt}>
           <button onClick={handlePromptClick} className={styles.promptButton}>
-            Click here if you don't know what you want to talk about
+            Click here if you don&apos;t know what you want to talk about
           </button>
           {selectedPrompt && (
             <p className={styles.selectedPrompt}>{selectedPrompt}</p>
