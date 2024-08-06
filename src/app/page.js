@@ -7,46 +7,55 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   const prompts = [
-    "Describe a moment in your life that changed your perspective or path. How did it shape who you are today?",
-    "Share something you're grateful for and how it impacts your daily life.",
-    "Discuss a dream you have and what steps you're taking to achieve it. How does pursuing this dream make you feel?",
-    "Share a lesson you learned the hard way and how it's influenced your approach to life.",
-    "Recall a time when an act of kindness, big or small, made a significant impact on your life.",
-    "Share your thoughts on a philosophical question that intrigues you. For example, what is the meaning of success? What role does fate play in our lives?",
-    "Have you experienced a serendipitous moment that felt like destiny? Share that story.",
-    "Talk about a piece of art (music, literature, visual arts) that profoundly affected you. Why did it resonate with you?",
-    "Share an experience or tradition from your culture that holds deep meaning for you.",
-    "What is one change you hope to see in the world in your lifetime?",
-    "Share a moment when you felt deeply connected to nature. What did it reveal to you about life or yourself?",
-    "Reflect on how technology has changed your life for better or worse.",
-    "Share a hilarious and awkward moment. How did you handle it?",
-    "Tell us about a time when things went hilariously wrong. What was the epic fail?",
-    "Recall a funny misunderstanding you were involved in. How did it get resolved?",
-    "Describe your funniest bad date experience. What made it so memorable?",
-    "Share a story about a cooking experiment that went comically awry.",
-    "What’s the most ridiculous fashion trend you’ve ever followed?",
-    "Tell us about a funny or bizarre thing your pet has done.",
-    "Recall a time when you or someone you know hilariously failed at using technology.",
-    "Ever had a phrase or word get hilariously lost in translation?",
-    "Talk about a DIY project that ended up being a disaster (but hopefully no one got hurt).",
-    "What’s a funny misconception you had as a child?",
-    "Do you have an unusual fear? Tell us about it and why it’s funny to you.",
-    "Tell us about a moment that shifted your vibe. How did it mold the person you are today?",
-    "Spill the tea on your big dream and what moves you're making to make it real. How does hustling for it make you feel?",
-    "Share a tough lesson you learned and how it shook up your game plan.",
-    "Remember when someone’s kindness hit you in the feels? Tell us about that game-changing moment.",
-    "What's a head-scratcher that's got you thinking? Like, what's the deal with success or fate?",
-    "Ever had a moment where everything felt like it was meant to be?",
-    "Talk about a piece of art that hit you right in the feels. Why did it speak to your soul?",
-    "Share a tradition or moment from your culture that's got mad meaning for you.",
-    "What's one thing you're gunning for in the world, like, before you're old?",
-    "How's tech changing your life, for better or for worse?",
-    "Spill the tea on a moment so awkward, it's hilarious. How'd you handle it?",
-    "Share the tea on a holiday gathering gone wild.",
-    "Ever had a phrase or word get totally lost in translation and it was straight-up LOL?",
-    "Talk about a DIY project that went south real quick (hopefully, no one got hurt!).",
-    "What's a hilarious thing you believed as a kid?",
-    "Share a travel mishap that had you laughing (or crying) all the way home.",
+    "Remember that time you realized the snooze button was your best friend?",
+    "What’s something you’re grateful for, other than coffee and Wi-Fi?",
+    "Does your dream involve napping and is it achievable while horizontal?",
+    "What's the most enlightening 'Reply All' email mistake you’ve made?",
+    "Why do socks vanish in the laundry?",
+    "Have you ever found abstract art more confusing than an IKEA manual?",
+    "Have you ever felt like a buffet for mosquitoes?",
+    "What's the most embarrassing moment you’ve had that still makes you cringe?",
+    "What’s your best 'I wish I stayed home' date story?",
+    "What’s the most embarrassing fashion trend you once proudly followed?",
+    "What was the time you handled an awkward situation with grace, or at least with humor?",
+    "Have you ever watched a holiday gathering spiral into board game chaos?",
+    "How did your DIY project end up with more glue on you than the project itself?",
+    
+    "Did you ever think your GPS was just testing your sense of direction?",
+    "Have you ever mistaken the 'reply all' button for 'reply' and instantly regretted it?",
+    "What's your most 'should have left the house five minutes earlier' traffic story?",
+    "Have you ever confused an art exhibit for the storage closet?",
+    "Did you ever realize halfway through a workout that your couch is a better fit?",
+    "What's your funniest 'I definitely misunderstood the assignment' moment?",
+    "Have you ever spent longer deciding what to watch than actually watching something?",
+    "What's the most epic 'did that just happen?' moment you've witnessed?",
+    "Ever been so confident in karaoke that you invented your own lyrics?",
+    "What's your most dramatic tale of trying to assemble a piece of furniture?",
+    "Ever accidentally sent a text to the person you were gossiping about?",
+    "What's your most cringe-worthy encounter with a celebrity?",
+    "Ever had a 'let's pretend that didn't happen' moment at work?",
+    "Have you ever been so certain it was Friday, but it was only Wednesday?",
+    "What's your most ridiculous 'this will look great in my living room' purchase?",
+    "Have you ever accidentally worn your clothes inside out all day?",
+    "What's your most awkward elevator encounter?",
+    "Have you ever attempted a new recipe and ended up ordering takeout?",
+    "What's your most 'should have known better' moment with a power tool?",
+    "Have you ever committed to a New Year's resolution that lasted one whole day?",
+    "What's your funniest story about trying to act cool in front of a crush?",
+    "Ever wondered why the simplest instructions become the hardest puzzles?",
+    "What's your most memorable encounter with a telemarketer?",
+    "Have you ever had a 'this is not what I ordered' restaurant experience?",
+    "What's your most epic tale of procrastination gone wrong?",
+    "Have you ever felt like the only adult in a room full of grown-up children?",
+    "What's your most creative excuse for not doing homework or work?",
+    "Ever thought your dog was plotting against you for not sharing your snacks?",
+    "What's your most hilarious travel story involving a missed flight or wrong destination?",
+    "Have you ever experienced a day where everything was upside down, literally?",
+    "What's your funniest story about trying to master a new hobby?",
+    "Ever had a 'how did I end up here?' moment in a social situation?",
+    "What's your most unforgettable story about surviving a family reunion?",
+    "Have you ever had a technology fail at the worst possible moment?",
+    "What's your most amusing story about mishearing song lyrics?"
   ];
 
   const [selectedPrompt, setSelectedPrompt] = useState("");
@@ -75,7 +84,6 @@ export default function Home() {
       element.addEventListener("click", handleClick);
     });
 
-    // Cleanup function to remove event listeners
     return () => {
       Array.from(coll).forEach((element) => {
         element.removeEventListener("click", handleClick);
@@ -86,6 +94,9 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.centered}>
+      <div className={styles.logo}>
+          <Image src="phone-02.svg" width={100} height={100}></Image>
+        </div>
         <div className={styles.logo}>
           <Image src="logo.svg" width={200} height={100}></Image>
         </div>
