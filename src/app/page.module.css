@@ -198,7 +198,6 @@
   padding: 20px 10px 40px;
   border-bottom: 2px dotted var(--blue);
   background-color: var(--yellow);
-
 }
 
 .faq {
@@ -266,7 +265,34 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .info {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .promptItem {
+    grid-template-columns: 1fr;
 
+  }
+  
+  .latestPromptItem {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial {
+    grid-template-columns: 1fr;
+  }
+
+  .callNow {
+    font-size: 1.3em;
+  } 
+
+  .info {
+    height: 300px;
+  }
+
+  .menu {
+    top: 150px;
+  }
 }
 
 /* Tablet and Smaller Desktop */
