@@ -1,0 +1,35 @@
+.faq {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow-y: auto; 
+}
+  
+.collapsible {
+    font-size: 1.5em;
+    font-weight: 600;
+    background-color: #fffff8;
+    color: #111111;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+.active, .collapsible:hover {
+    color: #fffff8;
+    background: linear-gradient(rgb(60, 76, 255) 0%, rgb(15, 20, 159) 100%);
+}
+  
+.collapsible:after {
+    content: '+';
+    color: #fffff8;
+    float: right;
+    margin-left: 5px;
+}
+  
+.active:after {
+    color: #fffff8;
+    content: "-";
+}

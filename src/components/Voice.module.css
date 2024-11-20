@@ -1,0 +1,24 @@
+.voiceWrapper {
+    position: absolute;
+    top: 125px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.muteButton {
+    border: 2px solid var(--white);
+    background-color: var(--red);
+    color: var(--white);
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    height: 4rem;
+}
+
+@media (max-width: 700px) {
+    .voiceWrapper {
+        bottom: 125px;
+        top: auto;
+    }
+}

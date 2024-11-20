@@ -1,0 +1,33 @@
+.flashWrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    z-index: 888;
+}
+  
+.flashWrapper p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--red);
+    text-transform: uppercase;
+
+    text-align: center;
+    transform: scaleX(5) scaleY(10);
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 700px) {
+    .flashWrapper {
+        display: block;
+    }
+
+    .flashWrapper p {
+        color: rgba(0,0,0,0);
+    }
+}

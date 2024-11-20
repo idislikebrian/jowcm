@@ -1,0 +1,38 @@
+.button {
+    position: relative;
+    display: inline-flex;
+    height: 4rem; /* h-12 */
+    width: 4rem; /* w-12 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 9999px; /* rounded-full */
+    font-weight: 900; /* font-medium */
+    transition: all 0.3s; /* duration-300 */
+    background-color: var(--blue);
+    color: var(--white);
+    border: none;
+}
+
+.button:hover {
+    width: 9rem; /* hover:w-32 */
+}
+
+.hoverText {
+    font-size: large;
+    display: inline-flex;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.2s; /* duration-200 */
+    transform: translateX(0);
+}
+
+.button:hover .hoverText {
+    transform: translateX(-0.75rem); /* group-hover:-translate-x-3 */
+    opacity: 1;
+}
+
+.iconContainer {
+    position: absolute;
+    right: 0.875rem; /* right-3.5 */
+}

@@ -1,52 +1,35 @@
-'use client'
-import { useState } from "react";
+'use client';
 import styles from "./page.module.css";
-import Footer from "../components/Footer";
+import ThreeScene from "@/components/ThreeScene";
 import MenuBar from "@/components/MenuBar";
-import Info from "@/components/Info";
-import Faq from "@/components/FAQ";
-import Prompts from "@/components/Prompt";
-
-// Dummy content for each page
-const pages = {
-  Info: <Info />,
-  FAQs: <Faq />,
-  Prompts: <Prompts />,
-  // Submissions: <div>Submissions Page Content</div>,
-};
+import BackgroundVideo from "@/components/BackgroundVideo";
+import Ticker from "@/components/Ticker";
+import MenuButton from"@/components/MenuButton";
+import Flash from "@/components/Flash";
+import Voice from "@/components/Voice";
 
 export default function Home() {
-  const [activePage, setActivePage] = useState(null);
-
-  const handleMenuClick = (page) => {
-    setActivePage(page);
-  };
-
   return (
-    <main className={styles.main}>
-      <div className={styles.splitscreen}>
-        <div className={styles.left}>
-          <MenuBar />
-          <div className={styles.menu}>
-            <div className={styles.menuContainer}>
-              {Object.keys(pages).map((page) => (
-                <div className={styles.menuItem} key={page}>
-                  <div
-                    className={styles.menuStyle}
-                    onClick={() => handleMenuClick(page)}
-                  >
-                    <h3 className={styles.listItem}>{page}</h3>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className={styles.main}>
+      <BackgroundVideo />
+      <Ticker text="First, Kamala takes the L... Then Tyson takes the L... When are we going to get a W?" />
+      
+      <div className={styles.menu}>
+        {/* <MenuButton hoverText="menu"/> */}
         </div>
-        <div className={styles.right}>
-          {activePage ? pages[activePage] : <div></div>}
-        </div>
+      <div className={styles.content}>
+        {/* 
+        <Flash 
+            blinkFrequency={1000} 
+            messageChangeFrequency={2500} 
+            timeBetweenMessages={20000} 
+            messages={["Call Now!!!!!"]} 
+        />
+        */}
+        <Voice />
+        <MenuBar />
+        <ThreeScene />
       </div>
-      <Footer />
-    </main>
+    </div>
   );
 }

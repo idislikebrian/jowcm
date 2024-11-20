@@ -1,127 +1,47 @@
 .main {
+  position: relative;
   min-height: 100vh;
+  overflow: hidden; /* Ensure no content spills outside */
 }
 
-.splitscreen {
-  z-index: 2;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.left {
+.content {
+  position: relative;
   z-index: 1;
-  position: relative;
-  flex: 0 0 50%;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
-  transition: 0.35s;
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: 150px 1fr;
-  border-right: solid var(--blue) 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.right {
-  z-index: 0;
-  position: relative;
-  flex: 0 0 50%;
-  background: white;
-  transition: 0.35s;
-  max-width: 100%;
-  max-height: 100vh;
-  overflow: hidden;
+.canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 2; /* Ensure the 3D canvas is above the background */
 }
 
 .info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 10px;
-  height: 150px;
-  width: 100%;
-  background: #fffff8;
-  color: #111111;
-  border-bottom: 2px solid black;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.info p {
-  font-weight: 900;
-}
-
-.menu {
-  position: relative;
-}
-
-.menuContainer {
-  z-index: 0;
-  display: grid;
-  grid-template-rows: repeat(auto-fill, 100px);
   position: absolute;
-  height: 100%;
+  top: 0;
   width: 100%;
-  background: white;
-}
-
-.menuItem {
-  display: flex;
+  max-height: 75px;
+  display: flex; /* Switch to flexbox */
+  justify-content: space-between; /* Space items evenly */
+  z-index: 1000;
+  background-color: var(--white);
+  border-bottom: 2px solid black;
+  padding: 20px 10px;
   align-items: center;
-  overflow: auto;
-  padding-left: 1rem;
-  border-bottom: 1px dotted black;
 }
 
-.menuItem:hover {
-  display: flex;
-  align-items: center;
-  overflow: auto;
-  color: white;
-  background: linear-gradient(rgb(60, 76, 255) 0%, rgb(15, 20, 159) 100%);
+.cta {
+  position: absolute;
+  top: 50%; 
+  left: 50%; /* Position the left edge at 50% of the viewport width */
+  transform: translate(-50%, -50%);/* Shift the element by 50% on both x and y axis to center it */
+  z-index: 1001; /* Ensure it is above other elements */
 }
 
-.menuStyle {
-  flex: 1 1 0%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 1rem;
-}
-
-.menuStyle:hover {
-  cursor: pointer;
-}
-
-.listItem {
-  margin: 0px;
-  height: 100%;
-  padding: 0.25rem;
-  font-size: 1em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  align-self: center;
-}
-
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  min-height: 100vh;
-}
-
-.logo {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  margin: 1em;
-  min-width: 80%;
-}
-
-.callNow {
+.cta button {
   background-color: var(--yellow);
   color: #111111;
   height: 2em;
@@ -132,181 +52,29 @@
   padding: 10px 15px;
 }
 
-.buttonSpace {
-  margin-top: 100px;
-  align-self: center;
+.separator {
+  font-family: monospace;
 }
 
-.schedule {
-  font-size: 1.5em;
-  font-weight: 600;
-  text-align: center;
-  background-color: #fffff8;
-  color: #111111;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
+.menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 30px;
+  z-index: 1000;
 }
 
-.tutorial {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 1em;
-  text-align: center;
-}
-
-.num {
-  font-size: 6em;
-  color: var(--red);
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.fine {
-  font-size: 0.6em;
-  font-style: italic;
-  margin: 1em;
-}
-
-.answering {
-  position: fixed;
-  width: 100vw;
-  padding: 10px;
-  left: 0px;
-  bottom: 0px;
-  background-color: #ededed;
-}
-
-.promptItem {
-  border-top: none;
-  background-color: #fffff8;
-  padding: 10px 10px 30px;
-  display: grid;
-  grid-template-columns: 0.33fr 1fr;
-  border-bottom: 0.5px solid var(--blue);
-
-}
-
-.latestPromptItem {
-  display: grid;
-  grid-template-columns: 0.33fr 1fr;
-  font-size: 1.6em;
-  font-weight: 500;
-  color: var(--blue);
-  padding: 20px 10px 40px;
-  border-bottom: 2px dotted var(--blue);
-  background-color: var(--yellow);
-}
-
-.faq {
-  display: grid;
-  grid-template-columns: 1fr;
-  overflow-y: auto; 
-}
-
-.collapsible {
-  font-size: 1.5em;
-  font-weight: 600;
-  background-color: #fffff8;
-  color: #111111;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-}
-
-.active, .collapsible:hover {
-  color: #fffff8;
-  background: linear-gradient(rgb(60, 76, 255) 0%, rgb(15, 20, 159) 100%);
-}
-
-.collapsible:after {
-  content: '+';
-  color: #fffff8;
-  float: right;
-  margin-left: 5px;
-}
-
-.active:after {
-  color: #fffff8;
-  content: "-";
-}
-
-.content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  background-color: var(--yellow);
-  padding: 0 18px;
-}
-
-.content p {
-  margin: 18px 0;
-}
-
-.active + .content {
-  max-height: 500px; 
-}
-
-.footer p {
-  margin-top: 20px;
-  font-size: smaller;
-}
-
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
-}
-
-/* Mobile */
 @media (max-width: 700px) {
   .info {
-    grid-template-columns: repeat(1, 1fr);
+   max-height: 20px;
+  }
+
+  .cta button {
+    transform: translateY(50vh);
   }
   
-  .promptItem {
-    grid-template-columns: 1fr;
-
-  }
-  
-  .latestPromptItem {
-    grid-template-columns: 1fr;
-  }
-
-  .tutorial {
-    grid-template-columns: 1fr;
-  }
-
-  .callNow {
-    font-size: 1.3em;
-  } 
-
-  .info {
-    height: 300px;
-  }
-
-  .menu {
-    top: 150px;
-  }
 }
 
-/* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
-  }
-}
 
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
 }

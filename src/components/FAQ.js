@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import styles from "../app/page.module.css";
+import styles from "@/components/FAQ.module.css";
 
 export default function Faq() {
   useEffect(() => {
