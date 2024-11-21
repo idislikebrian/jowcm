@@ -8,7 +8,7 @@ const BackgroundVideo = () => {
     <div className={styles.backgroundVideo}>
       <iframe
         src={`https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&mute=1&loop=1`}
-        frameBorder="0"
+        style={{ border: 'none' }}
         allow="autoplay; encrypted-media; fullscreen"
         allowFullScreen
         title="YouTube Background Video"

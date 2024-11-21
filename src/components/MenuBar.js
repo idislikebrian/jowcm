@@ -23,7 +23,7 @@ const MenuBar = () => {
     const timezone = date
       .toLocaleTimeString("en-US", { timeZoneName: "short" })
       .split(" ")
-      .pop(); 
+      .pop();
 
     return {
       hours,
@@ -38,7 +38,13 @@ const MenuBar = () => {
   return (
     <div className={styles.info}>
       <div>
-        <Image src="logo-left.svg" width={100} height={100} alt="Logo" />
+        <Image
+          src="logo-left.svg"
+          width={100}
+          height={100}
+          alt="Logo"
+          priority={true}
+        />
       </div>
       <div className={styles.cta}>
         <Call />
