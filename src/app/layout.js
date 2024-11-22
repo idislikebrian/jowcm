@@ -6,6 +6,10 @@ export const metadata = {
   url: "https://journalingoutdoorswouldcureme.live", 
   metadataBase: new URL('https://journalingoutdoorswouldcureme.live'),
   site_name: "Journaling Outdoors Would Cure Me", 
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.ico', 
+  },
   image: {
     url: "/opengraph-image.png",
     type: "image/png", 
