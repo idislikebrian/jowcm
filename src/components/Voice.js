@@ -8,7 +8,7 @@ const Voice = () => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.muted = true; 
+      audioRef.current.muted = true;
     }
   }, []);
 

@@ -22,3 +22,9 @@
         top: auto;
     }
 }
+
+@media (hover: none) {
+    .muteButton {
+      pointer-events: auto;
+    }
+}

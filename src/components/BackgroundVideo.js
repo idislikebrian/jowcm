@@ -11,7 +11,7 @@ const BackgroundVideo = () => {
         style={{ border: 'none' }}
         allow="autoplay; encrypted-media; fullscreen"
         allowFullScreen
-        title="YouTube Background Video"
+        title="bg"
       ></iframe>
     </div>
   );

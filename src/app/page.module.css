@@ -1,7 +1,7 @@
 .main {
   position: relative;
   min-height: 100vh;
-  overflow: hidden; /* Ensure no content spills outside */
+  overflow: hidden;
 }
 
 .content {
@@ -24,8 +24,8 @@
   top: 0;
   width: 100%;
   max-height: 75px;
-  display: flex; /* Switch to flexbox */
-  justify-content: space-between; /* Space items evenly */
+  display: flex; 
+  justify-content: space-between; 
   z-index: 1000;
   background-color: var(--white);
   border-bottom: 2px solid black;
@@ -36,9 +36,9 @@
 .cta {
   position: absolute;
   top: 50%; 
-  left: 50%; /* Position the left edge at 50% of the viewport width */
-  transform: translate(-50%, -50%);/* Shift the element by 50% on both x and y axis to center it */
-  z-index: 1001; /* Ensure it is above other elements */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
 }
 
 .cta button {
