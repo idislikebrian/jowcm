@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className={styles.main}>
       <BackgroundVideo />
-      <Ticker text="First, Kamala takes the L... Then Tyson takes the L... When are we going to get a W?" />
+      <Ticker text="Will you risk it all under the office mistletoe this year? 😏 Are you puckering up for your work spouse at the holiday party? 🎄🔥" />
       
       <div className={styles.menu}>
         {/* <MenuButton hoverText="menu"/> */}
