@@ -7,15 +7,17 @@ import Ticker from "@/components/Ticker";
 import MenuButton from"@/components/MenuButton";
 import Flash from "@/components/Flash";
 import Voice from "@/components/Voice";
+import PromptButton from "@/components/PromptInfoButton";
 
 export default function Home() {
   return (
     <div className={styles.main}>
       <BackgroundVideo />
-      <Ticker text="If your body could leave a Yelp review of your life, what would it say?" />
+      <Ticker text="What’s a “sacred cow” in your world that deserves a takedown?" />
       
       <div className={styles.menu}>
         {/* <MenuButton hoverText="menu"/> */}
+        <PromptButton hoverText="info" />
         </div>
       <div className={styles.content}>
         {/* 

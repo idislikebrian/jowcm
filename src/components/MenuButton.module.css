@@ -11,7 +11,7 @@
     transition: all 0.3s; /* duration-300 */
     background-color: var(--blue);
     color: var(--white);
-    border: none;
+    border: dotted 2px var(--white);
 }
 
 .button:hover {
