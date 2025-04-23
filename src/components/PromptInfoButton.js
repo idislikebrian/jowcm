@@ -34,7 +34,7 @@ const PromptButton = ({ hoverText }) => {
           </div>
           <div className={styles.popupBody}>
             <p>
-              <strong>&quo;Greed = (Write Your Own Expletive Here)&quo;</strong>
+              <strong>&quot;Greed = (Write Your Own Expletive Here)&quot;</strong>
             </p>
             <p>
               Pick one belief, habit, or object people around you treat as
