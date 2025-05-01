@@ -13,11 +13,11 @@ export default function Home() {
   return (
     <div className={styles.main}>
       <BackgroundVideo />
-      <Ticker text="What’s a “sacred cow” in your world that deserves a takedown?" />
+      <Ticker text="Lights failed in Europe, but the music played on in Los Angeles --- When the grid goes down, what keeps you glowing?" />
       
       <div className={styles.menu}>
         {/* <MenuButton hoverText="menu"/> */}
-        <PromptButton hoverText="info" />
+        {/* <PromptButton hoverText="info" /> */}
         </div>
       <div className={styles.content}>
         {/* 
