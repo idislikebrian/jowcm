@@ -1,0 +1,51 @@
+.root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  background: var(--white);
+  color: var(--plumnoir);
+  font-family: var(--space-mono);
+  font-weight: 600;
+}
+
+.dialed {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  color: var(--white);
+}
+
+.dialpad {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  gap: 12px;
+  justify-content: center;
+}
+
+.key {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 1px dotted var(--wasabi);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: var(--plumnoir);
+}
+
+.progressTrack {
+  height: 4px;
+  width: 200px;
+  margin: 10px auto;
+  background: var(--yellow);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--plumnoir);
+  transform-origin: left;
+}
