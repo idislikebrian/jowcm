@@ -32,6 +32,7 @@ export function MiniDialSplash({ children }) {
   const [step, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
 
+  // 1️⃣ Drive the dialing animation ONLY
   useEffect(() => {
     if (!enabled || finished) return;
 
@@ -41,11 +42,16 @@ export function MiniDialSplash({ children }) {
     }
 
     setFinished(true);
+  }, [step, enabled, finished]);
+
+  // 2️⃣ Signal readiness ONLY when SDK is actually available
+  useEffect(() => {
+    if (!enabled || !finished) return;
 
     if (isMiniApp && sdk?.actions?.ready) {
       sdk.actions.ready();
     }
-  }, [step, enabled, finished, isMiniApp, sdk]);
+  }, [enabled, finished, isMiniApp, sdk]);
 
   const activeKey = DIAL_SEQUENCE[step - 1];
   const progress = step / DIAL_SEQUENCE.length;
