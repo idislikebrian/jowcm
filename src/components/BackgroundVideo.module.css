@@ -1,20 +1,20 @@
 .backgroundVideo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw; 
-    height: 100vh; 
-    z-index: -1; 
-    overflow: hidden;
-  }
-  
-  .backgroundVideo iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 177.78vh;
-    height: 100vh;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--jade-on-paper);
+}
+
+.backgroundVideo iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}

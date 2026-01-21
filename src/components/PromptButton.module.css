@@ -1,0 +1,69 @@
+.buttonContainer {
+    position: fixed;
+    bottom: 50px;
+    right: 10px
+}
+
+.button {
+    position: relative;
+    display: inline-flex;
+    height: 4rem;
+    width: 4rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 9999px;
+    font-weight: 900;
+    transition: all 0.3s;
+    background-color: var(--yellow);
+    color: var(--white);
+    border: dashed 2px var(--white);
+}
+
+.button:hover {
+    width: 9rem;
+}
+
+.hoverText {
+    font-size: large;
+    display: inline-flex;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.2s; /* duration-200 */
+    transform: translateX(0);
+}
+
+.promptNote {
+    font-size: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.button:hover .hoverText {
+    transform: translateX(-0.75rem);
+    opacity: 1;
+}
+
+.button:hover .iconContainer {
+    transform:translateX(2rem);
+}
+
+.iconContainer {
+    position: absolute;
+    transition: all 0.2s;
+}
+
+.archiveLink {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: var(--black);
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .popup {
+        width: 60vw;
+    }
+}

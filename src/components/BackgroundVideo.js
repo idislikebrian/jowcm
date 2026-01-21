@@ -6,13 +6,13 @@ const BackgroundVideo = () => {
 
   return (
     <div className={styles.backgroundVideo}>
-      <iframe
+      {/* <iframe
         src={`https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&mute=1&loop=1`}
         style={{ border: 'none' }}
         allow="autoplay; encrypted-media; fullscreen"
         allowFullScreen
         title="bg"
-      ></iframe>
+      ></iframe> */}
     </div>
   );
 };

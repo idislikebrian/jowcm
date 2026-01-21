@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "../app/page.module.css"
+import styles from "./Call.module.css"
 
 const Call = () => {
   return (
-    <div>
-      <button className={styles.callNow}>
+    <div className={styles.callNow}>
+      <button>
         <a href="tel:+17727421283">772-742-1283</a>
       </button>
     </div>

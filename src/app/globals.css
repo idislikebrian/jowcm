@@ -23,6 +23,8 @@
 
   --space-mono: 'Space Mono', monospace;
   --ibm-plex-sans: 'IBM Plex Sans', sans-serif;
+
+  --shadow: 5px 5px 0px rgba(0, 0, 0, 100);
 }
 
 * {
@@ -39,7 +41,7 @@ body {
 }
 
 body {
-  font-family: 'IBM Sans', sans-serif;
+  font-family: var(--ibm-plex-sans);
 }
 
 a {

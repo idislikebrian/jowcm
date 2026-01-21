@@ -1,0 +1,10 @@
+.callNow button {
+  background-color: var(--yellow);
+  color: var(--black);
+  height: 2em;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.5em;
+  font-weight: 800;
+  padding: 10px 15px;
+}

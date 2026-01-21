@@ -1,0 +1,16 @@
+.reel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.column {
+  position: relative;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}

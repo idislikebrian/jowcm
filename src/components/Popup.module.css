@@ -1,0 +1,71 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.menubar {
+  height: 50px;
+  width: 100%;
+  padding: 0.25rem 1rem;
+  border-bottom: 2px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 100;
+  background-color: var(--white);
+  cursor: grab;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.menubar:active {
+  cursor: grabbing;
+}
+
+.close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.close:hover {
+  opacity: 0.6;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;
+  background-color: var(--white);
+  border: 2px solid var(--black);
+  color: var(--black);
+  box-shadow: var(--shadow);
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.popup p {
+  padding: 10px 0px;
+  font-size: 1.2rem;
+}
+
+.popupBody {
+  padding: 1rem;
+}
+
+.cta button {
+  background-color: var(--yellow);
+  color: var(--black);
+  height: 2em;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.5em;
+  font-weight: 800;
+  padding: 10px 15px;
+}

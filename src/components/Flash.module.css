@@ -9,10 +9,10 @@
 }
   
 .flashWrapper p {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: var(--ibm-plex-sans);
     font-size: 3rem;
     font-weight: bold;
-    color: var(--red);
+    color: var(--available);
     text-transform: uppercase;
 
     text-align: center;

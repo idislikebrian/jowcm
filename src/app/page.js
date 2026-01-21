@@ -7,29 +7,30 @@ import Ticker from "@/components/Ticker";
 import MenuButton from "@/components/MenuButton";
 import Flash from "@/components/Flash";
 import Voice from "@/components/Voice";
-import PromptButton from "@/components/PromptInfoButton";
+import PromptButton from "@/components/PromptButton";
 import { MiniDialSplash } from "@/components/MiniDialSplash";
+import { getCurrentPrompt } from "@/utils/prompts";
+
 
 export default function Home() {
   return (
     <MiniDialSplash>
       <div className={styles.main}>
         <BackgroundVideo />
-        <Ticker text="Lights failed in Europe, but the music played on in Los Angeles --- When the grid goes down, what keeps you glowing?" />
+        <Ticker text={getCurrentPrompt()} />
 
         <div className={styles.menu}>
           {/* <MenuButton hoverText="menu"/> */}
           <PromptButton hoverText="info" />
         </div>
         <div className={styles.content}>
-          {/* 
+          
         <Flash 
-            blinkFrequency={1000} 
-            messageChangeFrequency={2500} 
+            blinkFrequency={2000} 
+            messageChangeFrequency={150} 
             timeBetweenMessages={20000} 
-            messages={["Call Now!!!!!"]} 
+            messages={["Call Now!", "Ramble On!", "Journaling", "Outdoors", "Would", "Cure", "Me", "Dial In!"]} 
         />
-        */}
 
           <Voice />
           <MenuBar />

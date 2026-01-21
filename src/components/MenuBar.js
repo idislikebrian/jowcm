@@ -49,7 +49,7 @@ const MenuBar = () => {
       <div className={styles.cta}>
         <Call />
       </div>
-      <div>
+      {/* <div>
         <h3>
           {hours}
           <span className={styles.separator}>{blink ? ":" : " "}</span>
@@ -57,7 +57,7 @@ const MenuBar = () => {
           <span className={styles.separator}>{blink ? ":" : " "}</span>
           {seconds} <span>({timezone})</span>
         </h3>
-      </div>
+      </div> */}
     </div>
   );
 };
