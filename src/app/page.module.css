@@ -57,6 +57,7 @@
 }
 
 .menu {
+  display: flex;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -73,6 +74,10 @@
     transform: translateY(50vh);
   }
   
+  .menu {
+    justify-content: left;
+    margin-left: 10px;
+  }
 }
 
 @media (min-width: 701px) and (max-width: 1120px) {
