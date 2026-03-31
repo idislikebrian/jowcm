@@ -15,7 +15,6 @@
   font-size: 0.9rem;
   font-weight: 700;
   padding: 10px 14px;
-  box-shadow: 4px 4px 0 var(--black);
   cursor: pointer;
 }
 
@@ -33,7 +32,6 @@
   font-size: 0.85rem;
   font-weight: 700;
   padding: 10px 14px;
-  box-shadow: 4px 4px 0 var(--black);
 }
 
 .error {
@@ -50,6 +48,5 @@
   .saved {
     font-size: 0.72rem;
     padding: 8px 10px;
-    box-shadow: 3px 3px 0 var(--black);
   }
 }

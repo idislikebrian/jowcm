@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAddFrame, useMiniKit } from "@coinbase/onchainkit/minikit";
 import styles from "./MiniAppActions.module.css";
 import { isMiniAppContext } from "@/utils/miniapp";
@@ -17,6 +17,18 @@ export default function MiniAppActions() {
   if (!isMiniApp) {
     return null;
   }
+
+  useEffect(() => {
+    if (!saveError) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setSaveError(false);
+    }, 2500);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [saveError]);
 
   async function handleSave() {
     setIsSaving(true);
@@ -46,7 +58,7 @@ export default function MiniAppActions() {
           disabled={isSaving}
           onClick={handleSave}
         >
-          {isSaving ? "Saving..." : saveError ? "Try save again" : "Save Mini App"}
+          {isSaving ? "Saving..." : saveError ? "Save unavailable" : "Save Mini App"}
         </button>
       )}
     </div>
