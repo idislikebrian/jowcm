@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# JOWCM Site
 
-## Getting Started
+Frontend for the `Journaling Outdoors Would Cure Me` hotline project.
 
-First, run the development server:
+This repo currently focuses on the public-facing site and share-preview experience:
+- homepage and interactive UI
+- weekly prompt display logic
+- dynamic Open Graph image generation
+- Base mini app metadata and splash behavior
+- local mock APIs for future product flows
+
+Twilio logic has been removed from this repo and now lives in a separate backend project.
+
+## Local Development
+
+From [site](/site):
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Weekly Prompt Logic
 
-## Learn More
+The homepage ticker, prompt modal, and OG image all share the same prompt source of truth in [src/utils/prompts.js](/src/utils/prompts.js).
 
-To learn more about Next.js, take a look at the following resources:
+- `PROMPT_CYCLE` contains the rotating prompt list
+- `getISOWeek()` computes the active ISO week
+- `getPromptForWeek()` derives the prompt for a given week
+- `getCurrentPrompt()` returns the current live prompt
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Dynamic Open Graph Image
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The homepage uses a dynamic social image route at [src/app/api/og/home/route.js](/src/app/api/og/home/route.js).
 
-## Deploy on Vercel
+Useful local URLs:
+- Home page: [http://localhost:3000](http://localhost:3000)
+- OG image: [http://localhost:3000/api/og/home](http://localhost:3000/api/og/home)
+- Week-specific OG image: [http://localhost:3000/api/og/home?week=14](http://localhost:3000/api/og/home?week=14)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The image is week-aware so social crawlers can refresh as the prompt rotates.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Mock Prompt Blast API
+
+For future prompt-broadcast work, this repo includes a local mock API that simulates a prompt blast without Twilio.
+
+Route:
+- `POST /api/mock/prompt-blast`
+- `GET /api/mock/prompt-blast`
+
+### What it does
+
+- accepts a message payload
+- validates basic input
+- simulates sending to a small mock subscriber list
+- returns a JSON summary and per-recipient mock delivery results
+- does not send SMS, store data, or require external services
+
+### Example Requests
+
+Inspect the mock list:
+
+```bash
+curl http://localhost:3000/api/mock/prompt-blast
+```
+
+Simulate a blast:
+
+```bash
+curl -X POST http://localhost:3000/api/mock/prompt-blast \
+  -H "Content-Type: application/json" \
+  -d '{"message":"This week'\''s prompt is live. Call 601 OUT SIDE."}'
+```
+
+### Example Response Shape
+
+```json
+{
+  "ok": true,
+  "mode": "mock",
+  "message": "This week's prompt is live. Call 601 OUT SIDE.",
+  "sentTo": 3,
+  "successCount": 3,
+  "errorCount": 0,
+  "results": [
+    {
+      "to": "+15555550101",
+      "status": "mock-sent",
+      "mockId": "mock-1"
+    }
+  ]
+}
+```
+
+This route is meant to give the frontend and future backend a lightweight contract to build against before real messaging is wired back in.
+
+## Build
+
+```bash
+npm run build
+```
+
+## Deployment
+
+The site is production-ready as a standalone frontend.
+
+Before deploying:
+- verify the homepage loads
+- verify [http://localhost:3000/api/og/home](http://localhost:3000/api/og/home) renders locally
+- verify the metadata on the homepage points to the dynamic OG image
+
+## Environment Notes
+
+The app may use values from `.env.local` for MiniKit / onchain metadata and stream behavior. Twilio credentials are no longer required in this repo.
