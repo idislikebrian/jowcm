@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMiniKit } from '@coinbase/onchainkit/minikit';
+import sdk from '@farcaster/frame-sdk';
 import styles from './MiniDialSplash.module.css';
 import { isMiniAppContext } from '@/utils/miniapp';
 
@@ -18,10 +19,31 @@ const DIAL_SEQUENCE = ['1','6','0','1','6','8','8','7','4','3','3'];
 export function MiniDialSplash({ children }) {
   const force = process.env.NEXT_PUBLIC_FORCE_MINI_SPLASH === 'true';
   const { context, isFrameReady, setFrameReady } = useMiniKit();
-  const enabled = isMiniAppContext(context) || force;
+  const [sdkContextAvailable, setSdkContextAvailable] = useState(force);
+  const enabled = isMiniAppContext(context) || sdkContextAvailable || force;
 
   const [step, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sdk.context
+      .then((frameContext) => {
+        if (!cancelled) {
+          setSdkContextAvailable(Boolean(frameContext));
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setSdkContextAvailable(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // 1️⃣ Drive the dialing animation ONLY
   useEffect(() => {
@@ -39,7 +61,27 @@ export function MiniDialSplash({ children }) {
   useEffect(() => {
     if (!enabled || !finished || isFrameReady) return;
 
-    setFrameReady();
+    let cancelled = false;
+
+    async function signalReady() {
+      try {
+        await setFrameReady();
+      } catch (error) {
+        try {
+          await sdk.actions.ready();
+        } catch (readyError) {
+          if (!cancelled) {
+            console.error('Failed to signal Mini App readiness', readyError ?? error);
+          }
+        }
+      }
+    }
+
+    signalReady();
+
+    return () => {
+      cancelled = true;
+    };
   }, [enabled, finished, isFrameReady, setFrameReady]);
 
   const activeKey = DIAL_SEQUENCE[step - 1];

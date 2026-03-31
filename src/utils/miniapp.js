@@ -11,20 +11,36 @@ export const MINI_APP_TAGS = ["hotline", "journaling", "art", "voice", "social"]
 export const MINI_APP_SPLASH_BACKGROUND = "#FED41D";
 export const MINI_APP_BASE_APP_ID = "696fb9fdf22fe462e74c1700";
 
+export function normalizeHexColor(value, fallback = MINI_APP_SPLASH_BACKGROUND) {
+  if (!value) {
+    return fallback;
+  }
+
+  const trimmed = value.trim();
+  const prefixed = trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
+
+  return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(prefixed)
+    ? prefixed
+    : fallback;
+}
+
 export function getMiniAppUrl() {
   return process.env.NEXT_PUBLIC_URL || "https://journalingoutdoorswouldcureme.live";
 }
 
 export function getMiniAppAssets() {
   const rootUrl = getMiniAppUrl();
+  const currentWeek = getISOWeek();
+  const embedImageUrl = `${rootUrl}/api/miniapp/embed?week=${currentWeek}`;
 
   return {
     rootUrl,
-    iconUrl: `${rootUrl}/favicon.png`,
-    splashImageUrl: `${rootUrl}/splash.png`,
+    iconUrl: `${rootUrl}/api/miniapp/icon`,
+    splashImageUrl: process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL || `${rootUrl}/splash.png`,
     heroImageUrl: `${rootUrl}/api/og/home`,
-    ogImageUrl: `${rootUrl}/api/og/home?week=${getISOWeek()}`,
-    screenshotUrls: [`${rootUrl}/api/og/home`],
+    embedImageUrl,
+    ogImageUrl: `${rootUrl}/api/og/home?week=${currentWeek}`,
+    screenshotUrls: [embedImageUrl],
   };
 }
 
@@ -46,7 +62,7 @@ export function getMiniAppManifest() {
       name: MINI_APP_MANIFEST_NAME,
       homeUrl: assets.rootUrl,
       iconUrl: assets.iconUrl,
-      imageUrl: assets.ogImageUrl,
+      imageUrl: assets.embedImageUrl,
       buttonTitle: `Launch ${MINI_APP_SHORT_NAME}`,
       splashImageUrl: assets.splashImageUrl,
       splashBackgroundColor: MINI_APP_SPLASH_BACKGROUND,
@@ -59,7 +75,7 @@ export function getMiniAppManifest() {
       tagline: MINI_APP_TAGLINE,
       ogTitle: MINI_APP_MANIFEST_NAME,
       ogDescription: MINI_APP_DESCRIPTION,
-      ogImageUrl: assets.ogImageUrl,
+      ogImageUrl: assets.embedImageUrl,
       noindex: process.env.NODE_ENV !== "production",
     },
   };

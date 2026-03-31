@@ -5,9 +5,9 @@ import {
   MINI_APP_DESCRIPTION,
   MINI_APP_NAME,
   MINI_APP_SHORT_NAME,
-  MINI_APP_SPLASH_BACKGROUND,
   getMiniAppAssets,
   getMiniAppUrl,
+  normalizeHexColor,
 } from "@/utils/miniapp";
 
 const assets = getMiniAppAssets();
@@ -39,17 +39,31 @@ export const metadata = {
   category: "art center",
   other: {
     "base:app_id": MINI_APP_BASE_APP_ID,
+    "fc:miniapp": JSON.stringify({
+      version: process.env.NEXT_PUBLIC_VERSION || "next",
+      imageUrl: assets.embedImageUrl,
+      button: {
+        title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME}`,
+        action: {
+          type: "launch_miniapp",
+          name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME,
+          url: appUrl,
+          splashImageUrl: assets.splashImageUrl,
+          splashBackgroundColor: normalizeHexColor(process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR),
+        },
+      },
+    }),
     "fc:frame": JSON.stringify({
       version: process.env.NEXT_PUBLIC_VERSION || "next",
-      imageUrl: process.env.NEXT_PUBLIC_IMAGE_URL || assets.ogImageUrl,
+      imageUrl: assets.embedImageUrl,
       button: {
         title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME}`,
         action: {
           type: "launch_frame",
           name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME,
           url: appUrl,
-          splashImageUrl: process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL || assets.splashImageUrl,
-          splashBackgroundColor: process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR || MINI_APP_SPLASH_BACKGROUND,
+          splashImageUrl: assets.splashImageUrl,
+          splashBackgroundColor: normalizeHexColor(process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR),
         },
       },
     }),
