@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMiniKit } from '@coinbase/onchainkit/minikit';
 import styles from './MiniDialSplash.module.css';
+import { isMiniAppContext } from '@/utils/miniapp';
 
 const KEYS = [
   '1','2','3',
@@ -16,18 +17,8 @@ const DIAL_SEQUENCE = ['1','6','0','1','6','8','8','7','4','3','3'];
 
 export function MiniDialSplash({ children }) {
   const force = process.env.NEXT_PUBLIC_FORCE_MINI_SPLASH === 'true';
-
-  let sdk, isMiniApp;
-
-  try {
-    const mini = useMiniKit();
-    sdk = mini.sdk;
-    isMiniApp = mini.isMiniApp;
-  } catch {
-    isMiniApp = false;
-  }
-
-  const enabled = isMiniApp || force;
+  const { context, isFrameReady, setFrameReady } = useMiniKit();
+  const enabled = isMiniAppContext(context) || force;
 
   const [step, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -44,14 +35,12 @@ export function MiniDialSplash({ children }) {
     setFinished(true);
   }, [step, enabled, finished]);
 
-  // 2️⃣ Signal readiness ONLY when SDK is actually available
+  // 2️⃣ Signal readiness only once the splash is complete inside Mini App clients
   useEffect(() => {
-    if (!enabled || !finished) return;
+    if (!enabled || !finished || isFrameReady) return;
 
-    if (isMiniApp && sdk?.actions?.ready) {
-      sdk.actions.ready();
-    }
-  }, [enabled, finished, isMiniApp, sdk]);
+    setFrameReady();
+  }, [enabled, finished, isFrameReady, setFrameReady]);
 
   const activeKey = DIAL_SEQUENCE[step - 1];
   const progress = step / DIAL_SEQUENCE.length;

@@ -7,6 +7,7 @@ This repo currently focuses on the public-facing site and share-preview experien
 - weekly prompt display logic
 - dynamic Open Graph image generation
 - Base mini app metadata and splash behavior
+- Farcaster/Base Mini App manifest and save/add support
 - local mock APIs for future product flows
 
 Twilio logic has been removed from this repo and now lives in a separate backend project.
@@ -43,6 +44,44 @@ Useful local URLs:
 - Week-specific OG image: [http://localhost:3000/api/og/home?week=14](http://localhost:3000/api/og/home?week=14)
 
 The image is week-aware so social crawlers can refresh as the prompt rotates.
+
+### Mini App Foundation
+
+The app now includes a Mini App manifest endpoint and a frontend-only save/add flow for compatible clients.
+
+Key pieces:
+- manifest: [src/app/.well-known/farcaster.json/route.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/app/.well-known/farcaster.json/route.js)
+- shared Mini App config: [src/utils/miniapp.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/utils/miniapp.js)
+- MiniKit provider: [src/providers/MiniKitProvider.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/providers/MiniKitProvider.js)
+- splash/readiness flow: [src/components/MiniDialSplash.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/components/MiniDialSplash.js)
+- save/add CTA: [src/components/MiniAppActions.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/components/MiniAppActions.js)
+
+Useful local URLs:
+- manifest: [http://localhost:3000/.well-known/farcaster.json](http://localhost:3000/.well-known/farcaster.json)
+- OG image: [http://localhost:3000/api/og/home](http://localhost:3000/api/og/home)
+
+Current Mini App asset/source-of-truth setup:
+- home URL: `NEXT_PUBLIC_URL` or production domain fallback
+- icon: `/favicon.png`
+- splash: `/splash.png`
+- OG / hero image: `/api/og/home`
+
+### Account Association
+
+This repo is prepared for account association, but does not generate the signed values for you.
+
+Before public indexing/discovery, generate and provide:
+- `FARCASTER_HEADER`
+- `FARCASTER_PAYLOAD`
+- `FARCASTER_SIGNATURE`
+
+Those values populate the manifest `accountAssociation` block. Until then, the manifest is present but not fully verified for production discovery.
+
+### Mini App Notes
+
+- The save/add CTA only appears inside a compatible Mini App client.
+- The custom splash now calls frame readiness through MiniKit once the splash animation finishes.
+- Authentication, notifications, and backend token persistence are intentionally deferred for a later phase.
 
 ## Mock Prompt Blast API
 
@@ -110,8 +149,10 @@ The site is production-ready as a standalone frontend.
 
 Before deploying:
 - verify the homepage loads
+- verify [http://localhost:3000/.well-known/farcaster.json](http://localhost:3000/.well-known/farcaster.json) returns valid JSON locally
 - verify [http://localhost:3000/api/og/home](http://localhost:3000/api/og/home) renders locally
 - verify the metadata on the homepage points to the dynamic OG image
+- verify Mini App assets and manifest values use the intended production domain
 
 ## Environment Notes
 

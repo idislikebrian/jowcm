@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../app/page.module.css";
 import Image from "next/image";
 import Call from "./Call";
+import MiniAppActions from "./MiniAppActions";
 
 const MenuBar = () => {
   const [time, setTime] = useState(new Date());
@@ -49,6 +50,7 @@ const MenuBar = () => {
       <div className={styles.cta}>
         <Call />
       </div>
+      <MiniAppActions />
       {/* <div>
         <h3>
           {hours}

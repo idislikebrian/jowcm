@@ -1,16 +1,27 @@
 import "./globals.css";
 import { MiniKitContextProvider } from '@/providers/MiniKitProvider';
+import {
+  MINI_APP_BASE_APP_ID,
+  MINI_APP_DESCRIPTION,
+  MINI_APP_NAME,
+  MINI_APP_SHORT_NAME,
+  MINI_APP_SPLASH_BACKGROUND,
+  getMiniAppAssets,
+  getMiniAppUrl,
+} from "@/utils/miniapp";
+
+const assets = getMiniAppAssets();
+const appUrl = getMiniAppUrl();
 
 export const metadata = {
-  title: "Journaling Outdoors Would Cure Me",
-  description: "Call in. Speak your truth after the tone.",
-  url: "https://journalingoutdoorswouldcureme.live",
-  metadataBase: new URL("https://journalingoutdoorswouldcureme.live"),
-  site_name: "Journaling Outdoors Would Cure Me",
+  title: MINI_APP_NAME,
+  description: MINI_APP_DESCRIPTION,
+  metadataBase: new URL(appUrl),
+  site_name: MINI_APP_NAME,
   openGraph: {
-    title: "Journaling Outdoors Would Cure Me",
-    description: "Call in. Speak your truth after the tone.",
-    siteName: "Journaling Outdoors Would Cure Me",
+    title: MINI_APP_NAME,
+    description: MINI_APP_DESCRIPTION,
+    siteName: MINI_APP_NAME,
     type: "website",
   },
   icons: {
@@ -19,28 +30,26 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Journaling Outdoors Would Cure Me",
-    description: "Call in. Speak your truth after the tone.",
+    title: MINI_APP_NAME,
+    description: MINI_APP_DESCRIPTION,
     siteId: "",
     creator: "@__chamaquito",
     creatorId: "",
   },
   category: "art center",
   other: {
-    "base:app_id": "696fb9fdf22fe462e74c1700",
+    "base:app_id": MINI_APP_BASE_APP_ID,
     "fc:frame": JSON.stringify({
       version: process.env.NEXT_PUBLIC_VERSION || "next",
-      imageUrl: process.env.NEXT_PUBLIC_IMAGE_URL,
+      imageUrl: process.env.NEXT_PUBLIC_IMAGE_URL || assets.ogImageUrl,
       button: {
-        title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || "JOWCM"}`,
+        title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME}`,
         action: {
           type: "launch_frame",
-          name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || "JOWCM",
-          url:
-            process.env.NEXT_PUBLIC_URL ||
-            "https://journalingoutdoorswouldcureme.live",
-          splashImageUrl: process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL,
-          splashBackgroundColor: `#${process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR || "FFFFFF"}`,
+          name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME,
+          url: appUrl,
+          splashImageUrl: process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL || assets.splashImageUrl,
+          splashBackgroundColor: process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR || MINI_APP_SPLASH_BACKGROUND,
         },
       },
     }),
