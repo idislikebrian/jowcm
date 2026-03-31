@@ -7,15 +7,15 @@ export const metadata = {
   url: "https://journalingoutdoorswouldcureme.live",
   metadataBase: new URL("https://journalingoutdoorswouldcureme.live"),
   site_name: "Journaling Outdoors Would Cure Me",
+  openGraph: {
+    title: "Journaling Outdoors Would Cure Me",
+    description: "Call in. Speak your truth after the tone.",
+    siteName: "Journaling Outdoors Would Cure Me",
+    type: "website",
+  },
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.ico",
-  },
-  image: {
-    url: "/opengraph-image.png",
-    type: "image/png",
-    width: 1200,
-    height: 630,
   },
   twitter: {
     card: "summary_large_image",

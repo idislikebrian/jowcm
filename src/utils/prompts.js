@@ -21,7 +21,12 @@ export function getISOWeek(date = new Date()) {
   return 1 + Math.round(((temp - firstThursday) / 86400000 - 3) / 7);
 }
 
-export function getCurrentPrompt() {
-  const index = getISOWeek() % PROMPT_CYCLE.length;
+export function getPromptForWeek(week) {
+  const normalizedWeek = Number.isFinite(week) ? week : getISOWeek();
+  const index = normalizedWeek % PROMPT_CYCLE.length;
   return PROMPT_CYCLE[index];
+}
+
+export function getCurrentPrompt() {
+  return getPromptForWeek(getISOWeek());
 }

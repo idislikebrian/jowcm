@@ -5,7 +5,7 @@ const Call = () => {
   return (
     <div className={styles.callNow}>
       <button>
-        <a href="tel:+17727421283">772-742-1283</a>
+        <a href="tel:+16016887433">(601) 688-7433</a>
       </button>
     </div>
   );
