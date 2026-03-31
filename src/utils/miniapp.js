@@ -3,7 +3,8 @@ import { getISOWeek } from "@/utils/prompts";
 export const MINI_APP_NAME = "Journaling Outdoors Would Cure Me";
 export const MINI_APP_SHORT_NAME = "JOWCM";
 export const MINI_APP_DESCRIPTION = "Call in. Speak your truth after the tone.";
-export const MINI_APP_SUBTITLE = "Hotline journaling, live and social";
+export const MINI_APP_MANIFEST_NAME = "Journaling Outdoors Hotline";
+export const MINI_APP_SUBTITLE = "Call 601 OUT SIDE";
 export const MINI_APP_TAGLINE = "Call 601 OUT SIDE";
 export const MINI_APP_PRIMARY_CATEGORY = "social";
 export const MINI_APP_TAGS = ["hotline", "journaling", "art", "voice", "social"];
@@ -42,7 +43,7 @@ export function getMiniAppManifest() {
     },
     miniapp: {
       version: "1",
-      name: MINI_APP_NAME,
+      name: MINI_APP_MANIFEST_NAME,
       homeUrl: assets.rootUrl,
       iconUrl: assets.iconUrl,
       imageUrl: assets.ogImageUrl,
@@ -56,7 +57,7 @@ export function getMiniAppManifest() {
       tags: MINI_APP_TAGS,
       heroImageUrl: assets.heroImageUrl,
       tagline: MINI_APP_TAGLINE,
-      ogTitle: MINI_APP_NAME,
+      ogTitle: MINI_APP_MANIFEST_NAME,
       ogDescription: MINI_APP_DESCRIPTION,
       ogImageUrl: assets.ogImageUrl,
       noindex: process.env.NODE_ENV !== "production",
