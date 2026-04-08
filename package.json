@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^0.38.11",
+    "@farcaster/frame-sdk": "^0.0.28",
     "@react-three/drei": "^9.117.3",
     "@react-three/fiber": "^8.17.10",
     "framer-motion": "^12.27.5",

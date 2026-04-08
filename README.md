@@ -6,8 +6,8 @@ This repo currently focuses on the public-facing site and share-preview experien
 - homepage and interactive UI
 - weekly prompt display logic
 - dynamic Open Graph image generation
-- Base mini app metadata and splash behavior
-- Farcaster/Base Mini App manifest and save/add support
+- Farcaster mini app metadata and splash behavior
+- Farcaster Mini App manifest and save/add support
 - local mock APIs for future product flows
 
 Twilio logic has been removed from this repo and now lives in a separate backend project.
@@ -52,7 +52,7 @@ The app now includes a Mini App manifest endpoint and a frontend-only save/add f
 Key pieces:
 - manifest: [src/app/.well-known/farcaster.json/route.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/app/.well-known/farcaster.json/route.js)
 - shared Mini App config: [src/utils/miniapp.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/utils/miniapp.js)
-- MiniKit provider: [src/providers/MiniKitProvider.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/providers/MiniKitProvider.js)
+- Farcaster runtime provider: [src/providers/FarcasterProvider.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/providers/FarcasterProvider.js)
 - splash/readiness flow: [src/components/MiniDialSplash.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/components/MiniDialSplash.js)
 - save/add CTA: [src/components/MiniAppActions.js](/Users/brian/Documents/00-cobalt/00-studio-stuff/hotline/site/src/components/MiniAppActions.js)
 
@@ -80,7 +80,7 @@ Those values populate the manifest `accountAssociation` block. Until then, the m
 ### Mini App Notes
 
 - The save/add CTA only appears inside a compatible Mini App client.
-- The custom splash now calls frame readiness through MiniKit once the splash animation finishes.
+- The custom splash now calls frame readiness through the Farcaster SDK once the splash animation finishes.
 - Authentication, notifications, and backend token persistence are intentionally deferred for a later phase.
 
 ## Mock Prompt Blast API
@@ -156,4 +156,4 @@ Before deploying:
 
 ## Environment Notes
 
-The app may use values from `.env.local` for MiniKit / onchain metadata and stream behavior. Twilio credentials are no longer required in this repo.
+The app may use values from `.env.local` for Farcaster mini app metadata and stream behavior. Twilio credentials are no longer required in this repo.

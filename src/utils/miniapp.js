@@ -9,7 +9,6 @@ export const MINI_APP_TAGLINE = "Call 601 OUT SIDE";
 export const MINI_APP_PRIMARY_CATEGORY = "social";
 export const MINI_APP_TAGS = ["hotline", "journaling", "art", "voice", "social"];
 export const MINI_APP_SPLASH_BACKGROUND = "#FED41D";
-export const MINI_APP_BASE_APP_ID = "696fb9fdf22fe462e74c1700";
 
 export function normalizeHexColor(value, fallback = MINI_APP_SPLASH_BACKGROUND) {
   if (!value) {

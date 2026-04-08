@@ -1,7 +1,6 @@
 import "./globals.css";
-import { MiniKitContextProvider } from '@/providers/MiniKitProvider';
+import { FarcasterProvider } from '@/providers/FarcasterProvider';
 import {
-  MINI_APP_BASE_APP_ID,
   MINI_APP_DESCRIPTION,
   MINI_APP_NAME,
   MINI_APP_SHORT_NAME,
@@ -12,6 +11,7 @@ import {
 
 const assets = getMiniAppAssets();
 const appUrl = getMiniAppUrl();
+const launchName = MINI_APP_SHORT_NAME;
 
 export const metadata = {
   title: MINI_APP_NAME,
@@ -38,15 +38,14 @@ export const metadata = {
   },
   category: "art center",
   other: {
-    "base:app_id": MINI_APP_BASE_APP_ID,
     "fc:miniapp": JSON.stringify({
       version: process.env.NEXT_PUBLIC_VERSION || "next",
       imageUrl: assets.embedImageUrl,
       button: {
-        title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME}`,
+        title: `Launch ${launchName}`,
         action: {
           type: "launch_miniapp",
-          name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME,
+          name: launchName,
           url: appUrl,
           splashImageUrl: assets.splashImageUrl,
           splashBackgroundColor: normalizeHexColor(process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR),
@@ -57,10 +56,10 @@ export const metadata = {
       version: process.env.NEXT_PUBLIC_VERSION || "next",
       imageUrl: assets.embedImageUrl,
       button: {
-        title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME}`,
+        title: `Launch ${launchName}`,
         action: {
           type: "launch_frame",
-          name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME || MINI_APP_SHORT_NAME,
+          name: launchName,
           url: appUrl,
           splashImageUrl: assets.splashImageUrl,
           splashBackgroundColor: normalizeHexColor(process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR),
@@ -74,7 +73,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <MiniKitContextProvider>{children}</MiniKitContextProvider>
+        <FarcasterProvider>{children}</FarcasterProvider>
       </body>
     </html>
   );
