@@ -1,0 +1,21 @@
+{
+  "name": "jowcm-snap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.ts",
+    "build": "tsc --noEmit",
+    "start": "node src/index.ts"
+  },
+  "dependencies": {
+    "@farcaster/snap-hono": "latest",
+    "@hono/node-server": "latest",
+    "hono": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0",
+    "vercel": "latest"
+  }
+}
