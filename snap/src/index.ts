@@ -6,6 +6,48 @@ import { fileURLToPath } from "node:url";
 
 const app = new Hono();
 const skipJFSVerification = true;
+const moods = {
+  stuck: [
+    "same thought, different minute",
+    "this isn’t moving",
+    "you’ve looked at this long enough",
+    "the room keeps repeating itself",
+  ],
+  spiraling: [
+    "you’re deep in it right now",
+    "this gets louder the longer you stay",
+    "you don’t need to solve this indoors",
+    "the thought is starting to eat the walls",
+  ],
+  bored: [
+    "nothing new is going to happen here",
+    "you’ve reached the end of this scroll",
+    "you’re not even enjoying this",
+    "the hour has gone soft around you",
+  ],
+  tired: [
+    "this isn’t sleep tired",
+    "you’ve been still too long",
+    "your body knows before you do",
+    "your edges are asking for air",
+  ],
+  avoiding: [
+    "you already know what it is",
+    "it’s still there when you close this",
+    "you’re circling it",
+    "the door is already open",
+  ],
+  scrolling: [
+    "this is autopilot",
+    "you didn’t come here for anything",
+    "you can stop",
+    "your thumb is wandering without you",
+  ],
+} as const;
+
+type MoodKey = keyof typeof moods;
+
+const lastLineByMood: Partial<Record<MoodKey, string>> = {};
 
 app.use("*", async (c, next) => {
   c.header("Vary", "Accept");
@@ -29,6 +71,23 @@ app.options("*", (c) => {
   });
 });
 
+const isMoodKey = (value: string | null): value is MoodKey => {
+  return value !== null && value in moods;
+};
+
+const randomFrom = (mood: MoodKey) => {
+  const options = moods[mood];
+  const previous = lastLineByMood[mood];
+  const pool =
+    previous && options.length > 1
+      ? options.filter((line) => line !== previous)
+      : options;
+  const line = pool[Math.floor(Math.random() * pool.length)] ?? options[0];
+
+  lastLineByMood[mood] = line;
+  return line;
+};
+
 const renderStartPage = (baseUrl: string) => ({
   version: "1.0" as const,
   theme: { accent: "green" as const },
@@ -38,42 +97,94 @@ const renderStartPage = (baseUrl: string) => ({
       page: {
         type: "stack",
         props: {},
-        children: ["title", "prompt", "response", "submit"],
+        children: [
+          "title",
+          "stuck",
+          "spiraling",
+          "bored",
+          "tired",
+          "avoiding",
+          "scrolling",
+        ],
       },
       title: {
         type: "text",
         props: {
-          content: "Journaling Outdoors Would Cure Me",
+          content: "where are you right now",
           weight: "bold",
           align: "center",
         },
       },
-      prompt: {
-        type: "text",
-        props: {
-          content: "What are you avoiding by staying indoors today?",
-          align: "center",
-        },
-      },
-      response: {
-        type: "input",
-        props: {
-          name: "response",
-          label: "Your answer",
-          placeholder: "Type your answer...",
-          maxLength: 280,
-        },
-      },
-      submit: {
+      stuck: {
         type: "button",
         props: {
-          label: "Submit thought",
+          label: "stuck",
           variant: "primary",
         },
         on: {
           press: {
             action: "submit",
-            params: { target: `${baseUrl}/?view=submit` },
+            params: { target: `${baseUrl}/?mood=stuck` },
+          },
+        },
+      },
+      spiraling: {
+        type: "button",
+        props: {
+          label: "spiraling",
+        },
+        on: {
+          press: {
+            action: "submit",
+            params: { target: `${baseUrl}/?mood=spiraling` },
+          },
+        },
+      },
+      bored: {
+        type: "button",
+        props: {
+          label: "bored",
+        },
+        on: {
+          press: {
+            action: "submit",
+            params: { target: `${baseUrl}/?mood=bored` },
+          },
+        },
+      },
+      tired: {
+        type: "button",
+        props: {
+          label: "tired",
+        },
+        on: {
+          press: {
+            action: "submit",
+            params: { target: `${baseUrl}/?mood=tired` },
+          },
+        },
+      },
+      avoiding: {
+        type: "button",
+        props: {
+          label: "avoiding",
+        },
+        on: {
+          press: {
+            action: "submit",
+            params: { target: `${baseUrl}/?mood=avoiding` },
+          },
+        },
+      },
+      scrolling: {
+        type: "button",
+        props: {
+          label: "scrolling",
+        },
+        on: {
+          press: {
+            action: "submit",
+            params: { target: `${baseUrl}/?mood=scrolling` },
           },
         },
       },
@@ -81,7 +192,7 @@ const renderStartPage = (baseUrl: string) => ({
   },
 });
 
-const renderResponsePage = (baseUrl: string) => ({
+const renderResponsePage = (baseUrl: string, line: string) => ({
   version: "1.0" as const,
   theme: { accent: "green" as const },
   ui: {
@@ -90,42 +201,36 @@ const renderResponsePage = (baseUrl: string) => ({
       page: {
         type: "stack",
         props: {},
-        children: ["title", "message", "actions"],
+        children: ["line", "instruction", "call", "actions", "footer"],
       },
-      title: {
+      line: {
         type: "text",
         props: {
-          content: "Noted.",
+          content: line,
           weight: "bold",
         },
       },
-      message: {
+      instruction: {
         type: "text",
         props: {
-          content: "That sounds like something worth stepping outside for.",
+          content: "take this outside",
+        },
+      },
+      call: {
+        type: "text",
+        props: {
+          content: "Call: 601-OUT-SIDE",
         },
       },
       actions: {
         type: "stack",
         props: { direction: "vertical" },
-        children: ["again", "visit"],
+        children: ["radio", "voicemail", "again"],
       },
-      again: {
+      radio: {
         type: "button",
         props: {
-          label: "Another prompt",
-        },
-        on: {
-          press: {
-            action: "submit",
-            params: { target: `${baseUrl}/` },
-          },
-        },
-      },
-      visit: {
-        type: "button",
-        props: {
-          label: "Visit site",
+          label: "play the radio",
         },
         on: {
           press: {
@@ -134,6 +239,38 @@ const renderResponsePage = (baseUrl: string) => ({
               target: "https://journalingoutdoorswouldcureme.live",
             },
           },
+        },
+      },
+      voicemail: {
+        type: "button",
+        props: {
+          label: "say it out loud",
+        },
+        on: {
+          press: {
+            action: "open_url",
+            params: {
+              target: "tel:6016887433",
+            },
+          },
+        },
+      },
+      again: {
+        type: "button",
+        props: {
+          label: "another one",
+        },
+        on: {
+          press: {
+            action: "submit",
+            params: { target: `${baseUrl}/?reset=1` },
+          },
+        },
+      },
+      footer: {
+        type: "text",
+        props: {
+          content: "tap when you step outside",
         },
       },
     },
@@ -172,6 +309,9 @@ app.post("/", async (c) => {
     process.env.SNAP_PUBLIC_BASE_URL ??
     "https://snap.journalingoutdoorswouldcureme.live";
   const acceptHeader = c.req.header("accept");
+  const url = new URL(c.req.url);
+  const mood = url.searchParams.get("mood");
+  const reset = url.searchParams.get("reset");
 
   let parsedBody: unknown;
   try {
@@ -206,7 +346,19 @@ app.post("/", async (c) => {
     snapPublicBaseUrl: process.env.SNAP_PUBLIC_BASE_URL ?? null,
   });
 
-  return c.body(JSON.stringify(renderResponsePage(baseUrl)), 200, {
+  if (reset === "1") {
+    return c.body(JSON.stringify(renderStartPage(baseUrl)), 200, {
+      "Content-Type": "application/vnd.farcaster.snap+json",
+    });
+  }
+
+  if (!isMoodKey(mood)) {
+    return c.body(JSON.stringify(renderStartPage(baseUrl)), 200, {
+      "Content-Type": "application/vnd.farcaster.snap+json",
+    });
+  }
+
+  return c.body(JSON.stringify(renderResponsePage(baseUrl, randomFrom(mood))), 200, {
     "Content-Type": "application/vnd.farcaster.snap+json",
   });
 });
@@ -218,7 +370,8 @@ registerSnapHandler(
       process.env.SNAP_PUBLIC_BASE_URL ??
       "https://snap.journalingoutdoorswouldcureme.live";
     const url = new URL(ctx.request.url);
-    const view = url.searchParams.get("view");
+    const mood = url.searchParams.get("mood");
+    const reset = url.searchParams.get("reset");
     const acceptHeader = ctx.request.headers.get("accept");
 
     console.log("snap request", {
@@ -234,10 +387,11 @@ registerSnapHandler(
     }
 
     if (ctx.action.type === "post") {
-      const response = ctx.action.inputs?.response;
+      if (reset === "1" || !isMoodKey(mood)) {
+        return renderStartPage(baseUrl);
+      }
 
-      void response;
-      return renderResponsePage(baseUrl);
+      return renderResponsePage(baseUrl, randomFrom(mood));
     }
 
     return renderStartPage(baseUrl);
