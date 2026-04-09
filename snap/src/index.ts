@@ -225,7 +225,7 @@ const renderResponsePage = (baseUrl: string, line: string) => ({
       actions: {
         type: "stack",
         props: { direction: "vertical" },
-        children: ["radio", "voicemail", "again"],
+        children: ["radio", "again"],
       },
       radio: {
         type: "button",
@@ -237,20 +237,6 @@ const renderResponsePage = (baseUrl: string, line: string) => ({
             action: "open_url",
             params: {
               target: "https://journalingoutdoorswouldcureme.live",
-            },
-          },
-        },
-      },
-      voicemail: {
-        type: "button",
-        props: {
-          label: "say it out loud",
-        },
-        on: {
-          press: {
-            action: "open_url",
-            params: {
-              target: "tel:6016887433",
             },
           },
         },
