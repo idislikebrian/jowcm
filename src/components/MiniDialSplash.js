@@ -15,14 +15,31 @@ const KEYS = [
 
 const DIAL_SEQUENCE = ['1','6','0','1','6','8','8','7','4','3','3'];
 
+function detectMiniAppShell() {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  try {
+    return window.self !== window.top || Boolean(window.ReactNativeWebView);
+  } catch {
+    return true;
+  }
+}
+
 export function MiniDialSplash({ children }) {
   const force = process.env.NEXT_PUBLIC_FORCE_MINI_SPLASH === 'true';
   const { isMiniApp, isReady, setReady } = useFarcasterMiniApp();
   const [sdkContextAvailable, setSdkContextAvailable] = useState(force);
-  const enabled = isMiniApp || sdkContextAvailable || force;
+  const [hostEnvironmentDetected, setHostEnvironmentDetected] = useState(force);
+  const enabled = isMiniApp || sdkContextAvailable || hostEnvironmentDetected || force;
 
   const [step, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    setHostEnvironmentDetected(detectMiniAppShell());
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
