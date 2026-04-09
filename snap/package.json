@@ -4,14 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node src/index.ts",
+    "dev": "tsx src/index.ts",
     "build": "tsc --noEmit",
     "start": "node src/index.ts"
   },
   "dependencies": {
     "@farcaster/snap-hono": "latest",
     "@hono/node-server": "latest",
-    "hono": "latest"
+    "hono": "latest",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

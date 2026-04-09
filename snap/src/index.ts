@@ -5,6 +5,31 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const app = new Hono();
+const skipJFSVerification = ["1", "true", "yes"].includes(
+  (process.env.SKIP_JFS_VERIFICATION ?? "").trim().toLowerCase(),
+);
+
+app.use("*", async (c, next) => {
+  c.header("Vary", "Accept");
+  c.header("Access-Control-Allow-Origin", "*");
+  c.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  c.header("Access-Control-Allow-Headers", "Content-Type");
+
+  await next();
+
+  c.header("Vary", "Accept");
+  c.header("Access-Control-Allow-Origin", "*");
+  c.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  c.header("Access-Control-Allow-Headers", "Content-Type");
+});
+
+app.options("*", (c) => {
+  return c.body(null, 200, {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  });
+});
 
 const renderStartPage = (baseUrl: string) => ({
   version: "1.0" as const,
@@ -113,29 +138,43 @@ const renderResponsePage = (baseUrl: string) => ({
   },
 });
 
-registerSnapHandler(app, async (ctx) => {
-  const baseUrl =
-    process.env.SNAP_PUBLIC_BASE_URL ??
-    "https://snap.journalingoutdoorswouldcureme.live";
-  const url = new URL(ctx.request.url);
-  const view = url.searchParams.get("view");
+registerSnapHandler(
+  app,
+  async (ctx) => {
+    const baseUrl =
+      process.env.SNAP_PUBLIC_BASE_URL ??
+      "https://snap.journalingoutdoorswouldcureme.live";
+    const url = new URL(ctx.request.url);
+    const view = url.searchParams.get("view");
+    const acceptHeader = ctx.request.headers.get("accept");
 
-  if (ctx.action.type === "get") {
+    console.log("snap request", {
+      actionType: ctx.action.type,
+      accept: acceptHeader,
+      skipJFSVerification,
+      snapPublicBaseUrl: process.env.SNAP_PUBLIC_BASE_URL ?? null,
+    });
+
+    if (ctx.action.type === "get") {
+      return renderStartPage(baseUrl);
+    }
+
+    if (view === "submit") {
+      void ctx.action.inputs.response;
+      return renderResponsePage(baseUrl);
+    }
+
+    if (view === "start") {
+      return renderStartPage(baseUrl);
+    }
+
     return renderStartPage(baseUrl);
-  }
-
-  if (view === "submit") {
-    void ctx.action.inputs.response;
-    return renderResponsePage(baseUrl);
-  }
-
-  if (view === "start") {
-    return renderStartPage(baseUrl);
-  }
-
-  return renderStartPage(baseUrl);
-});
-
+  },
+  {
+    path: "/",
+    skipJFSVerification,
+  },
+);
 const entryFilePath = fileURLToPath(import.meta.url);
 const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : "";
 
