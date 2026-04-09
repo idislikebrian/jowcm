@@ -9,7 +9,8 @@
     "start": "node src/index.ts"
   },
   "dependencies": {
-    "@farcaster/snap-hono": "latest",
+    "@farcaster/snap": "^1.20.0",
+    "@farcaster/snap-hono": "^1.5.9",
     "@hono/node-server": "latest",
     "hono": "latest",
     "tsx": "^4.21.0"
