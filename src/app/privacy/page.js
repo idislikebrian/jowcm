@@ -33,11 +33,12 @@ export default function PrivacyPage() {
           <li>To operate the journaling experience</li>
           <li>To send prompts and respond to messages</li>
           <li>To improve the experience over time</li>
+          <li>To comply with legal and carrier requirements</li>
         </ul>
 
         <h2 style={{ marginTop: 30 }}>Data Sharing</h2>
         <p>
-          We do not sell, rent, or share your personal information with third parties for marketing purposes.
+          We do not sell, rent, or share your personal information with third parties for marketing or promotional purposes.
         </p>
 
         <h2 style={{ marginTop: 30 }}>Data Storage</h2>
@@ -56,6 +57,10 @@ export default function PrivacyPage() {
 
         <h2 style={{ marginTop: 30 }}>Contact</h2>
         <p>hello@brian-felix.com</p>
+        <p>
+          For data requests or questions, contact:{" "}
+          <a href="mailto:hello@brian-felix.com">hello@brian-felix.com</a>
+        </p>
 
         <p style={{ marginTop: 40, fontSize: 12, opacity: 0.6 }}>
           Message and data rates may apply.

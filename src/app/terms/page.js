@@ -29,15 +29,16 @@ export default function TermsPage() {
         <p>Message and data rates may apply depending on your mobile carrier.</p>
 
         <h2 style={{ marginTop: 30 }}>Opt-Out</h2>
-        <p>You can opt out at any time by replying <strong>STOP</strong>.</p>
+        <p>You can opt out at any time by replying <strong>STOP</strong> to any message.</p>
 
         <h2 style={{ marginTop: 30 }}>Help</h2>
-        <p>For assistance, reply <strong>HELP</strong>.</p>
+        <p>For assistance, reply <strong>HELP</strong> at any time.</p>
 
         <h2 style={{ marginTop: 30 }}>User Consent</h2>
         <p>
-          By messaging the JOWCM phone number, you agree to receive conversational text messages related to the journaling experience.
+          By messaging the JOWCM (Journaling Outdoors Would Cure Me) phone number, you agree to receive conversational text messages related to the journaling experience.
         </p>
+        <p>No messages will be sent without prior user initiation.</p>
 
         <h2 style={{ marginTop: 30 }}>Privacy</h2>
         <p>Your information will be handled in accordance with our Privacy Policy.</p>
@@ -47,6 +48,10 @@ export default function TermsPage() {
 
         <h2 style={{ marginTop: 30 }}>Contact</h2>
         <p>hello@brian-felix.com</p>
+        <p>
+          For support, contact:{" "}
+          <a href="mailto:hello@brian-felix.com">hello@brian-felix.com</a>
+        </p>
 
         <p style={{ marginTop: 40, fontSize: 12, opacity: 0.6 }}>
           Message and data rates may apply.
